@@ -1,6 +1,15 @@
-Hello
-How are you?
-Nice to meet you
-Bye
-Wow
-Ha
+<html>
+  <head>
+  </head>
+  <body>
+    <div id="timeText">00:00:00</div><input id="startButton" type="button" value ="시작"/><input id="stopButton" type="button" value ="멈춤"/>
+    <script>
+      var inputElement =document.getElementById("startButton");var inputElement2 = document.getElementById("stopButton");var timeTextElement =document.getElementById("timeText");
+var startTime=null;var timerId = null;
+inputElement.addEventListener("click", function(){   startTime=Date.now();    if(timerId != null){     retrun;    }  timerId=setInterval(function(){  timeTextElement.innerHTML = ((Date.now()-startTime)/1000).toFixed(2); },10);})
+inputElement2.addEventListener("click",function(){  clearInterval(timerId);    timerId =null;})
+setInterval(function(){},1000)
+    </script>
+  </body>
+</html>
+
