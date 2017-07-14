@@ -1,19 +1,45 @@
 <html>
-  <head>
-    <style>
-      #timeText{  text-align: center;}
-    </style>
-    
-  </head>
-  <body>
-    <div id="timeText">00:00:00</div><input id="startButton" type="button" value ="시작"/><input id="stopButton" type="button" value ="멈춤"/>
-    <script>
-      var inputElement =document.getElementById("startButton");var inputElement2 = document.getElementById("stopButton");var timeTextElement =document.getElementById("timeText");
-var startTime=null;var timerId = null;
-inputElement.addEventListener("click", function(){   startTime=Date.now();    if(timerId != null){     retrun;    }  timerId=setInterval(function(){  timeTextElement.innerHTML = ((Date.now()-startTime)/1000).toFixed(2); },10);})
-inputElement2.addEventListener("click",function(){  clearInterval(timerId);    timerId =null;})
-setInterval(function(){},1000)
-    </script>
-  </body>
-</html>
+<head> 
+  <style>
+  </style>
+</head>
+<body>  
+  <div Id = "timeText">00:00.00</div>
+  <input Id="startButton" type = "button" value = "start"/>
+  <input Id="stopButton" type = "button" value = "stop"/>
+  <input Id="recordButton" type = "button" value = "record"/>
 
+  <ol id="labs">
+  </ol>
+  <script>
+    var inputElement = document.getElementById("startButton");
+    var inputElement2 = document.getElementById("stopButton");
+    var recordButtonElement = document.getElementById("recordButton");
+    var timeTextElement = document.getElementById("timeText");
+    var orderedListElement = document.getElementById("labs");
+    var starttime = null;
+    var timerId = null;
+    inputElement.addEventListener("click", function(){
+      starttime = Date.now();
+      if(timerId != null){
+        return;
+      }
+      timerId = setInterval(function(){
+   var seconds = (Date.now() - starttime) / 1000;
+   var minutes = Math.floor(seconds/60);
+   seconds = (seconds - minutes * 60).toFixed(2);
+        timeTextElement.innerHTML = (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+      })
+    });
+    inputElement2.addEventListener("click", function(){
+      clearInterval(timerId);
+      timerId = null;
+    })
+    recordButtonElement.addEventListener("click", function () {
+      var newItem = document.createElement("li");
+       newItem.innerHTML = timeTextElement.innerHTML;
+      labs.append(newItem);
+    })
+  </script>
+</body>
+</html>
